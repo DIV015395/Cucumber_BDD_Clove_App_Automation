@@ -29,14 +29,13 @@ public class LoginStepDefinition {
         test = extent.createTest("Test Case login", "Description of main login");
         DesiredCapabilities caps = DesireCap.desire();
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        obj = new AppLogin((AndroidDriver) driver, test);
 
     }
     @When("user will enter the user id")
     public void user_will_enter_the_user_id(){
         // Write code here that turns the phrase above into concrete actions
-
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        obj = new AppLogin((AndroidDriver) driver, test);
         obj.userName();
     }
     @When("user will enter the password")
@@ -53,5 +52,6 @@ public class LoginStepDefinition {
     public void user_will_click_on_notification_allowed() {
         // Write code here that turns the phrase above into concrete actions
         obj.permissonAllowed();
+        driver.quit();
     }
 }
